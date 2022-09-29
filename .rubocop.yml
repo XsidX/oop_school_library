@@ -51,3 +51,5 @@ Style/HashTransformValues:
   Enabled: false
 Style/OptionalBooleanParameter:
   Enabled: false
+Lint/AmbiguousBlockAssociation:
+  Enabled: false
