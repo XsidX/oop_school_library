@@ -1,0 +1,16 @@
+association  	-  no one owns the other
+	     	- can exist separately but also come together sometime.
+		- has a relationship
+		- manager has a swipe card
+
+aggregation   	- one owns the other, one and only one owner
+		- can use the owned class independent of the owner
+		- has many relationship
+		- manager has workers
+
+composition	- manager and project depends on each other
+		- manager and project are composed of each other
+		- the death relationship
+		
+		
+	     
