@@ -10,7 +10,7 @@ class Student < Person
 
   def classroom=(classroom)
     @classroom = classroom
-    classroom.add_student(self) unless classroom.nil?
+    classroom&.add_student(self)
   end
 
   def play_hooky
