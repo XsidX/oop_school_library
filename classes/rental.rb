@@ -5,9 +5,17 @@ class Rental
     @date = date
 
     @book = book
-    book.add_rental = self
+    book.rentals << self
 
     @person = person
-    person.add_rental = self
+    person.rentals << self
+  end
+
+  def self.all
+    ObjectSpace.each_object(self).to_a
+  end
+
+  def to_s
+    "Date: #{date}, Book \"#{book.title}\" by #{book.author}, Rented to: #{person.name}"
   end
 end

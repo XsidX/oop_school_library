@@ -16,4 +16,8 @@ class Student < Person
   def play_hooky
     "¯\(ツ)/¯"
   end
+
+  def to_s
+    "#{super} [Student] Name: #{name}, ID: #{id}, Age: #{age}"
+  end
 end
