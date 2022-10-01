@@ -2,8 +2,8 @@ require_relative 'nameable'
 require_relative 'decorators'
 
 class Person < Nameable
-  attr_accessor :name, :age, :parent_permission
-  attr_reader :id, :rentals
+  attr_accessor :name, :age, :parent_permission, :rentals
+  attr_reader :id
 
   def initialize(age, name = 'Unknown', parent_permission = true)
     super()
@@ -15,16 +15,21 @@ class Person < Nameable
     @rentals = []
   end
 
-  def add_rental=(rental)
-    @rentals << rental
-  end
-
   def can_use_services?
     of_age? || parent_permission
   end
 
   def correct_name
     name
+  end
+
+  def self.all
+    ObjectSpace.each_object(self).to_a
+  end
+
+  def to_s
+    index = Person.all.index(self)
+    "#{index})"
   end
 
   private
