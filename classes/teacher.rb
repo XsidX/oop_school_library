@@ -16,8 +16,6 @@ class Teacher < Person
     "#{super} [Teacher] Name: #{name}, ID: #{id}, Age: #{age}"
   end
 
-  private
-
   def self.create_teacher
     puts
     puts 'Age:'
@@ -29,11 +27,10 @@ class Teacher < Person
     puts 'Specialization:'
     specialization = gets.chomp
 
-    teacher = self.new(specialization, age, name)
+    teacher = new(specialization, age, name)
 
     puts
     puts 'Person created successfully'
     puts teacher
   end
-
 end

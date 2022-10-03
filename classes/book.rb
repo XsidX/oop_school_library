@@ -16,11 +16,9 @@ class Book
     "#{index}) Title: \"#{title}\", Author: #{author}"
   end
 
-  private
-
   def self.list_books
     puts 'List of books:'
-    puts self.all.empty? ? 'No books available yet' : self.all
+    puts all.empty? ? 'No books available yet' : all
   end
 
   def self.create_book
@@ -31,7 +29,7 @@ class Book
     puts 'Author:'
     author = gets.chomp
 
-    book = self.new(title, author)
+    book = new(title, author)
 
     puts
     puts 'Book created successfully'
@@ -40,15 +38,15 @@ class Book
 
   def self.select_book_for_renting
     puts 'Select a book from the following list by number'
-    if self.all.empty?
+    if all.empty?
       puts
       puts 'No books available'
       return
     end
-    puts self.all
+    puts all
     book_idx = gets.chomp.to_i
 
-    if book_idx > self.all.length || book_idx.negative?
+    if book_idx > all.length || book_idx.negative?
       puts 'Invalid book number'
       return
     end

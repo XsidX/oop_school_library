@@ -21,8 +21,6 @@ class Student < Person
     "#{super} [Student] Name: #{name}, ID: #{id}, Age: #{age}"
   end
 
-  private
-
   def self.create_student
     puts
     puts 'Age:'
@@ -34,11 +32,10 @@ class Student < Person
     puts 'Has parent permission? [Y/N]'
     parent_permission = gets.chomp.downcase == 'y'
 
-    student = self.new(Classroom.new(rand(100..108)), age, name, parent_permission)
+    student = new(Classroom.new(rand(100..108)), age, name, parent_permission)
 
     puts
     puts 'Person created successfully'
     puts student
   end
-
 end

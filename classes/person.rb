@@ -32,15 +32,13 @@ class Person < Nameable
     "#{index})"
   end
 
-  private
-
   def of_age?
     age >= 18
   end
 
   def self.list_people
     puts 'List of people:'
-    puts self.all.empty? ? 'No people available yet' : self.all
+    puts all.empty? ? 'No people available yet' : all
   end
 
   def self.create_person
@@ -61,10 +59,10 @@ class Person < Nameable
 
   def self.select_person_to_rent
     puts 'Select a person from the following list by number (not id)'
-    puts self.all
+    puts all
     person = gets.chomp.to_i
 
-    if person > self.all.length || person.negative?
+    if person > all.length || person.negative?
       puts 'Invalid person number'
       return
     end

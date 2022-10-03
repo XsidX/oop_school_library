@@ -1,5 +1,5 @@
-require_relative "person"
-require_relative "book"
+require_relative 'person'
+require_relative 'book'
 
 class Rental
   attr_accessor :date, :book, :person
@@ -22,7 +22,6 @@ class Rental
     "Date: #{date}, Book \"#{book.title}\" by #{book.author}, Rented to: #{person.name}"
   end
 
-  private 
   def self.create_rental
     puts
     book_class = Book.select_book_for_renting
@@ -32,7 +31,7 @@ class Rental
     puts 'Date:'
     date = gets.chomp
 
-    rental = self.new(date, Book.all[book_class], Person.all[person_class])
+    rental = new(date, Book.all[book_class], Person.all[person_class])
 
     puts
     puts 'Rental created successfully'
