@@ -58,4 +58,16 @@ class Person < Nameable
       puts 'That is not a valid input'
     end
   end
+
+  def self.select_person_to_rent
+    puts 'Select a person from the following list by number (not id)'
+    puts self.all
+    person = gets.chomp.to_i
+
+    if person > self.all.length || person.negative?
+      puts 'Invalid person number'
+      return
+    end
+    person
+  end
 end

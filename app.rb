@@ -10,45 +10,6 @@ class App
     puts 'Welcome to School Library App!'
   end
 
-  def person
-    puts 'Select a person from the following list by number (not id)'
-    puts Person.all
-    person = gets.chomp.to_i
-
-    if person > Person.all.length || person.negative?
-      puts 'Invalid person number'
-      return
-    end
-    person
-  end
-  
-  def create_rental
-    puts
-    book_class = Book.select_book_for_renting
-    puts
-    person_class = person
-    puts
-    puts 'Date:'
-    date = gets.chomp
-
-    rental = Rental.new(date, Book.all[book_class], Person.all[person_class])
-
-    puts
-    puts 'Rental created successfully'
-    puts rental
-  end
-
-  def list_rentals_by_person_id
-    puts 'ID of person:'
-    id = gets.chomp.to_i
-
-    rentals_by_person = Person.all.find { |person| person.id == id }
-
-    puts
-    puts 'Rentals:'
-    puts rentals_by_person.rentals
-  end
-
   def prompt
     puts
     puts 'Please choose an option by entering a number:'
@@ -72,9 +33,9 @@ class App
     when '4'
       Book.create_book
     when '5'
-      create_rental
+      Rental.create_rental
     when '6'
-      list_rentals_by_person_id
+      Rental.list_rentals_by_person_id
     else
       puts 'That is not a valid option'
     end
