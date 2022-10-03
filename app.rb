@@ -10,16 +10,11 @@ class App
     puts 'Welcome to School Library App!'
   end
 
-  def list_books
-    puts 'List of books:'
-    puts Book.all.empty? ? 'No books available yet' : Book.all
-  end
-
   def list_people
     puts 'List of people:'
     puts Person.all.empty? ? 'No people available yet' : Person.all
   end
-
+  
   def create_teacher
     puts
     puts 'Age:'
@@ -72,38 +67,6 @@ class App
     end
   end
 
-  def create_book
-    puts
-    puts 'Title:'
-    title = gets.chomp
-
-    puts 'Author:'
-    author = gets.chomp
-
-    book = Book.new(title, author)
-
-    puts
-    puts 'Book created successfully'
-    puts book
-  end
-
-  def book
-    puts 'Select a book from the following list by number'
-    if Book.all.empty?
-      puts
-      puts 'No books available'
-      return
-    end
-    puts Book.all
-    book = gets.chomp.to_i
-
-    if book > Book.all.length || book.negative?
-      puts 'Invalid book number'
-      return
-    end
-    book
-  end
-
   def person
     puts 'Select a person from the following list by number (not id)'
     puts Person.all
@@ -118,7 +81,7 @@ class App
 
   def create_rental
     puts
-    book_class = book
+    book_class = Book.select_book_for_renting
     puts
     person_class = person
     puts
@@ -158,13 +121,13 @@ class App
   def navigator(option)
     case option
     when '1'
-      list_books
+      Book.list_books
     when '2'
       list_people
     when '3'
       create_person
     when '4'
-      create_book
+      Book.create_book
     when '5'
       create_rental
     when '6'
