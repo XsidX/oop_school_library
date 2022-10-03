@@ -37,11 +37,25 @@ class Person < Nameable
   def of_age?
     age >= 18
   end
-end
 
-# person = Person.new(22, 'maximilianus')
-# p person.correct_name
-# capitalized_person = CapitalizeDecorator.new(person)
-# p capitalized_person.correct_name
-# capitalized_trimmed_person = TrimmerDecorator.new(capitalized_person)
-# p capitalized_trimmed_person.correct_name
+  def self.list_people
+    puts 'List of people:'
+    puts self.all.empty? ? 'No people available yet' : self.all
+  end
+
+  def self.create_person
+    puts
+    puts 'Do you want to create a student (1) or a Teacher (2)? [Input the number]'
+    option = gets.chomp
+
+    case option
+    when '1'
+      Student.create_student
+    when '2'
+      Teacher.create_teacher
+    else
+      puts
+      puts 'That is not a valid input'
+    end
+  end
+end
