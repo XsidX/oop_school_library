@@ -43,11 +43,12 @@ class Rental
     puts 'ID of person:'
     id = gets.chomp.to_i
 
-    rentals_by_person = Person.all.find { |person| person.id == id }
+    rentals = Rental.load_rentals
+    rental = rentals.find { |rental| rental['id'].to_i == id }
 
     puts
     puts 'Rentals:'
-    puts rentals_by_person.rentals
+    puts "date: #{rental['date']} book: #{rental['book']} rented by: #{rental['name']}"
   end
 
   def save
@@ -55,14 +56,14 @@ class Rental
     if(File.exist?('rentals.json'))
       rentals_file = File.read('rentals.json')
       rentals = JSON.parse(rentals_file)
-      rentals << { date: self.date, book: self.book, person: self.person}
+      rentals << { date: self.date, book: self.book.title, id: self.person.id, name: self.person.name }
 
       File.open('rentals.json', 'w') do |file|
         file.write(JSON.pretty_generate(rentals))
       end
     else
       File.open('rentals.json', 'w') do |file|
-        file.write(JSON.pretty_generate([{ date: self.date, book: self.book, person: self.person}]))
+        file.write(JSON.pretty_generate([{ date: self.date, book: self.book.title, id: self.person.id, name: self.person.name}]))
       end
     end
 
@@ -72,9 +73,7 @@ class Rental
     if(File.exist?('rentals.json'))
       rentals_file = File.read('rentals.json')
       rentals = JSON.parse(rentals_file)
-      rentals.each do |rental|
-        new(rental['date'], rental['book'], rental['person'])
-      end
+      return rentals
     end
   end
 end
