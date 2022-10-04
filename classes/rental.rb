@@ -44,36 +44,31 @@ class Rental
     id = gets.chomp.to_i
 
     rentals = Rental.load_rentals
-    rental = rentals.find { |rental| rental['id'].to_i == id }
+    person_rental = rentals.find { |rental| rental['id'].to_i == id }
 
     puts
     puts 'Rentals:'
-    puts "date: #{rental['date']} book: #{rental['book']} rented by: #{rental['name']}"
+    puts "date: #{person_rental['date']} book: #{person_rental['book']} rented by: #{person_rental['name']}"
   end
 
   def save
-
-    if(File.exist?('rentals.json'))
+    if File.exist?('rentals.json')
       rentals_file = File.read('rentals.json')
       rentals = JSON.parse(rentals_file)
-      rentals << { date: self.date, book: self.book.title, id: self.person.id, name: self.person.name }
+      rentals << { date: date, book: book.title, id: person.id, name: person.name }
 
-      File.open('rentals.json', 'w') do |file|
-        file.write(JSON.pretty_generate(rentals))
-      end
+      File.write('rentals.json', JSON.pretty_generate(rentals))
     else
-      File.open('rentals.json', 'w') do |file|
-        file.write(JSON.pretty_generate([{ date: self.date, book: self.book.title, id: self.person.id, name: self.person.name}]))
-      end
+      File.write('rentals.json', JSON.pretty_generate([{ date: date, book: book.title, id: person.id,
+                                                         name: person.name }]))
     end
-
   end
 
   def self.load_rentals
-    if(File.exist?('rentals.json'))
+    if File.exist?('rentals.json')
       rentals_file = File.read('rentals.json')
-      rentals = JSON.parse(rentals_file)
-      return rentals
+      JSON.parse(rentals_file)
+
     end
   end
 end

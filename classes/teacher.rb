@@ -37,25 +37,20 @@ class Teacher < Person
   end
 
   def save
-
-    if(File.exist?('teachers.json'))
+    if File.exist?('teachers.json')
       teachers_file = File.read('teachers.json')
       teachers = JSON.parse(teachers_file)
-      teachers << { age: self.age, name: self.name, specialization: self.specialization}
+      teachers << { age: age, name: name, specialization: specialization }
 
-      File.open('teachers.json', 'w') do |file|
-        file.write(JSON.pretty_generate(teachers))
-      end
+      File.write('teachers.json', JSON.pretty_generate(teachers))
     else
-      File.open('teachers.json', 'w') do |file|
-        file.write(JSON.pretty_generate([{ age: self.age, name: self.name, specialization: self.specialization }]))
-      end
+      File.write('teachers.json',
+                 JSON.pretty_generate([{ age: age, name: name, specialization: specialization }]))
     end
-
   end
 
   def self.load_teachers
-    if(File.exist?('teachers.json'))
+    if File.exist?('teachers.json')
       teachers_file = File.read('teachers.json')
       teachers = JSON.parse(teachers_file)
       teachers.each do |teacher|
@@ -63,5 +58,4 @@ class Teacher < Person
       end
     end
   end
-
 end

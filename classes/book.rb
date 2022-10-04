@@ -58,25 +58,19 @@ class Book
   end
 
   def save
-
-    if(File.exist?('books.json'))
+    if File.exist?('books.json')
       books_file = File.read('books.json')
       books = JSON.parse(books_file)
-      books << { title: self.title, author: self.author }
+      books << { title: title, author: author }
 
-      File.open('books.json', 'w') do |file|
-        file.write(JSON.pretty_generate(books))
-      end
+      File.write('books.json', JSON.pretty_generate(books))
     else
-      File.open('books.json', 'w') do |file|
-        file.write(JSON.pretty_generate([{ title: self.title, author: self.author }]))
-      end
+      File.write('books.json', JSON.pretty_generate([{ title: title, author: author }]))
     end
-
   end
 
   def self.load_books
-    if(File.exist?('books.json'))
+    if File.exist?('books.json')
       books_file = File.read('books.json')
       books = JSON.parse(books_file)
       books.each do |book|
@@ -84,5 +78,4 @@ class Book
       end
     end
   end
-
 end
