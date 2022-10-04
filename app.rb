@@ -12,6 +12,7 @@ class App
     Book.load_books
     Student.load_students
     Teacher.load_teachers
+    Rental.load_rentals
   end
 
   def prompt
