@@ -36,6 +36,7 @@ class Rental
     puts
     puts 'Rental created successfully'
     puts rental
+    rental.save
   end
 
   def self.list_rentals_by_person_id
@@ -47,5 +48,33 @@ class Rental
     puts
     puts 'Rentals:'
     puts rentals_by_person.rentals
+  end
+
+  def save
+
+    if(File.exist?('rentals.json'))
+      rentals_file = File.read('rentals.json')
+      rentals = JSON.parse(rentals_file)
+      rentals << { date: self.date, book: self.book, person: self.person}
+
+      File.open('rentals.json', 'w') do |file|
+        file.write(JSON.pretty_generate(rentals))
+      end
+    else
+      File.open('rentals.json', 'w') do |file|
+        file.write(JSON.pretty_generate([{ date: self.date, book: self.book, person: self.person}]))
+      end
+    end
+
+  end
+
+  def self.load_rentals
+    if(File.exist?('rentals.json'))
+      rentals_file = File.read('rentals.json')
+      rentals = JSON.parse(rentals_file)
+      rentals.each do |rental|
+        new(rental['date'], rental['book'], rental['person'])
+      end
+    end
   end
 end
