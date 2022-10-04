@@ -20,4 +20,22 @@ class Student < Person
   def to_s
     "#{super} [Student] Name: #{name}, ID: #{id}, Age: #{age}"
   end
+
+  def self.create_student
+    puts
+    puts 'Age:'
+    age = gets.chomp.to_i
+
+    puts 'Name:'
+    name = gets.chomp
+
+    puts 'Has parent permission? [Y/N]'
+    parent_permission = gets.chomp.downcase == 'y'
+
+    student = new(Classroom.new(rand(100..108)), age, name, parent_permission)
+
+    puts
+    puts 'Person created successfully'
+    puts student
+  end
 end

@@ -15,4 +15,22 @@ class Teacher < Person
   def to_s
     "#{super} [Teacher] Name: #{name}, ID: #{id}, Age: #{age}"
   end
+
+  def self.create_teacher
+    puts
+    puts 'Age:'
+    age = gets.chomp.to_i
+
+    puts 'Name:'
+    name = gets.chomp
+
+    puts 'Specialization:'
+    specialization = gets.chomp
+
+    teacher = new(specialization, age, name)
+
+    puts
+    puts 'Person created successfully'
+    puts teacher
+  end
 end
