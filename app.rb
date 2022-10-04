@@ -8,6 +8,8 @@ require './classes/book'
 class App
   def initialize
     puts 'Welcome to School Library App!'
+    # load data from json files
+    Book.load_books
   end
 
   def prompt
