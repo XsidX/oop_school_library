@@ -37,5 +37,38 @@ class Student < Person
     puts
     puts 'Person created successfully'
     puts student
+
+    student.save
   end
+
+
+  def save
+
+    if(File.exist?('students.json'))
+      students_file = File.read('students.json')
+      students = JSON.parse(students_file)
+      students << { age: self.age, name: self.name }
+
+      File.open('students.json', 'w') do |file|
+        file.write(JSON.pretty_generate(students))
+      end
+    else
+      File.open('students.json', 'w') do |file|
+        file.write(JSON.pretty_generate([{ age: self.age, name: self.name }]))
+      end
+    end
+
+  end
+
+  def self.load_students
+    if(File.exist?('students.json'))
+      students_file = File.read('students.json')
+      students = JSON.parse(students_file)
+      students.each do |student|
+        new(student['age'], student['name'])
+      end
+    end
+  end
+
+
 end

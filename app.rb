@@ -10,6 +10,8 @@ class App
     puts 'Welcome to School Library App!'
     # load data from json files
     Book.load_books
+    Student.load_students
+    Teacher.load_teachers
   end
 
   def prompt
