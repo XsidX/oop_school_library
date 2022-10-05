@@ -32,5 +32,30 @@ class Teacher < Person
     puts
     puts 'Person created successfully'
     puts teacher
+
+    teacher.save
+  end
+
+  def save
+    if File.exist?('teachers.json')
+      teachers_file = File.read('teachers.json')
+      teachers = JSON.parse(teachers_file)
+      teachers << { age: age, name: name, specialization: specialization }
+
+      File.write('teachers.json', JSON.pretty_generate(teachers))
+    else
+      File.write('teachers.json',
+                 JSON.pretty_generate([{ age: age, name: name, specialization: specialization }]))
+    end
+  end
+
+  def self.load_teachers
+    if File.exist?('teachers.json')
+      teachers_file = File.read('teachers.json')
+      teachers = JSON.parse(teachers_file)
+      teachers.each do |teacher|
+        new(teacher['age'], teacher['name'], teacher['specialization'])
+      end
+    end
   end
 end

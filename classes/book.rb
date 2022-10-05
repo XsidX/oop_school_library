@@ -1,3 +1,5 @@
+require 'json'
+
 class Book
   attr_accessor :title, :author, :rentals
 
@@ -34,6 +36,8 @@ class Book
     puts
     puts 'Book created successfully'
     puts book
+
+    book.save
   end
 
   def self.select_book_for_renting
@@ -51,5 +55,27 @@ class Book
       return
     end
     book_idx
+  end
+
+  def save
+    if File.exist?('books.json')
+      books_file = File.read('books.json')
+      books = JSON.parse(books_file)
+      books << { title: title, author: author }
+
+      File.write('books.json', JSON.pretty_generate(books))
+    else
+      File.write('books.json', JSON.pretty_generate([{ title: title, author: author }]))
+    end
+  end
+
+  def self.load_books
+    if File.exist?('books.json')
+      books_file = File.read('books.json')
+      books = JSON.parse(books_file)
+      books.each do |book|
+        new(book['title'], book['author'])
+      end
+    end
   end
 end

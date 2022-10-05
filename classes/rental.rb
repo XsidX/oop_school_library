@@ -36,16 +36,39 @@ class Rental
     puts
     puts 'Rental created successfully'
     puts rental
+    rental.save
   end
 
   def self.list_rentals_by_person_id
     puts 'ID of person:'
     id = gets.chomp.to_i
 
-    rentals_by_person = Person.all.find { |person| person.id == id }
+    rentals = Rental.load_rentals
+    person_rental = rentals.find { |rental| rental['id'].to_i == id }
 
     puts
     puts 'Rentals:'
-    puts rentals_by_person.rentals
+    puts "date: #{person_rental['date']} book: #{person_rental['book']} rented by: #{person_rental['name']}"
+  end
+
+  def save
+    if File.exist?('rentals.json')
+      rentals_file = File.read('rentals.json')
+      rentals = JSON.parse(rentals_file)
+      rentals << { date: date, book: book.title, id: person.id, name: person.name }
+
+      File.write('rentals.json', JSON.pretty_generate(rentals))
+    else
+      File.write('rentals.json', JSON.pretty_generate([{ date: date, book: book.title, id: person.id,
+                                                         name: person.name }]))
+    end
+  end
+
+  def self.load_rentals
+    if File.exist?('rentals.json')
+      rentals_file = File.read('rentals.json')
+      JSON.parse(rentals_file)
+
+    end
   end
 end

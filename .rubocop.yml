@@ -51,5 +51,7 @@ Style/HashTransformValues:
   Enabled: false
 Style/OptionalBooleanParameter:
   Enabled: false
+Style/GuardClause:
+  Enabled: false
 Lint/AmbiguousBlockAssociation:
   Enabled: false
