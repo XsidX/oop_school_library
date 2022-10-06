@@ -1,7 +1,4 @@
-require '../classes/person'
-require '../classes/student'
-require '../classes/teacher'
-require '../classes/classroom'
+require_relative 'spec_helper'
 
 describe Person do
   student = Student.new(Classroom.new(rand(100..108)), 18, 'John', true)
