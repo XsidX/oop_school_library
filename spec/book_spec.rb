@@ -1,8 +1,6 @@
 require_relative 'spec_helper'
 
 describe Book do
-
-
   before(:each) do
     @book = Book.new('The Hobbit', 'J.R.R. Tolkien')
   end
