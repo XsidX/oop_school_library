@@ -20,7 +20,9 @@ class Book
 
   def self.list_books
     puts 'List of books:'
-    puts all.empty? ? 'No books available yet' : all
+    all_books = all.empty? ? 'No books available yet' : all
+    puts all_books
+    all_books
   end
 
   def self.create_book
