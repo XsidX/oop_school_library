@@ -45,7 +45,7 @@ class Rental
 
     rentals = Rental.load_rentals
     persons_rentals = rentals.find { |rental| rental['id'].to_i == id }
-
+    persons_rentals
   end
 
   def self.list_rentals
