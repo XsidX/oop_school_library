@@ -53,5 +53,7 @@ Style/OptionalBooleanParameter:
   Enabled: false
 Style/GuardClause:
   Enabled: false
+Style/GlobalVars:
+  Enabled: false
 Lint/AmbiguousBlockAssociation:
   Enabled: false
