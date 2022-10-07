@@ -38,7 +38,9 @@ class Person < Nameable
 
   def self.list_people
     puts 'List of people:'
-    puts all.empty? ? 'No people available yet' : all
+    all_people = all.empty? ? 'No people available yet' : all
+    puts all_people
+    all_people
   end
 
   def self.create_person

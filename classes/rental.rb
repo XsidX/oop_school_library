@@ -39,16 +39,21 @@ class Rental
     rental.save
   end
 
-  def self.list_rentals_by_person_id
+  def self.rentals_by_person_id
     puts 'ID of person:'
     id = gets.chomp.to_i
 
     rentals = Rental.load_rentals
-    person_rental = rentals.find { |rental| rental['id'].to_i == id }
+    persons_rentals = rentals.find { |rental| rental['id'].to_i == id }
+    persons_rentals
+  end
 
+  def self.list_rentals
+    persons_rentals = self.rentals_by_person_id
     puts
     puts 'Rentals:'
-    puts "date: #{person_rental['date']} book: #{person_rental['book']} rented by: #{person_rental['name']}"
+    puts "date: #{persons_rentals['date']} book: #{persons_rentals['book']} rented by: #{persons_rentals['name']}"
+    persons_rentals
   end
 
   def save

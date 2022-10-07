@@ -39,7 +39,7 @@ class App
     when '5'
       Rental.create_rental
     when '6'
-      Rental.list_rentals_by_person_id
+      Rental.list_rentals
     else
       puts 'That is not a valid option'
     end
